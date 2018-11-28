@@ -20,3 +20,9 @@ Finally, to install the dependencies to run the app please run the following in 
 ```bash
 > pipenv install --dev
 ```
+
+## Starting the application
+From the project root dir run:
+```bash
+pipenv run python url_shortener/manage.py runserver 3000
+```

@@ -1,0 +1,2 @@
+class ShortenerException(Exception):
+    pass

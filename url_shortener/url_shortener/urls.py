@@ -20,7 +20,7 @@ from django.urls import include, path, re_path
 from shortener.views import redirect_shortened
 
 
-base64_pattern = r'(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+base64_pattern = r'(.*)$'
 
 
 urlpatterns = [

@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views import View
 
-# Create your views here.
+from django.http import JsonResponse
+
+class ShortenedUrlsAPI(View):
+
+    def get(self, request):
+        return JsonResponse({'hello': 'world'})

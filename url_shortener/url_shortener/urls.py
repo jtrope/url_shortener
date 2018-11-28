@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+
+from shortener.views import redirect_shortened
+
+
+base64_pattern = r'(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+
 
 urlpatterns = [
     # Static
@@ -23,4 +29,6 @@ urlpatterns = [
 
     # APIs
     path(settings.API_BASE + 'shortened_urls/', include('shortener.urls')),
+    re_path(r'^(?P<base64shortened>{})'.format(base64_pattern), redirect_shortened),
 ]
+

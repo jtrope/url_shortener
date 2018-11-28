@@ -122,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 API_BASE = 'api/'
+
+DOMAIN = 'http://127.0.0.1:3000/'

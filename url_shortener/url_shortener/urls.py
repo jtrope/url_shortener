@@ -30,6 +30,6 @@ urlpatterns = [
 
     # APIs
     path(settings.API_BASE + 'shortened_urls/', include('shortener.urls')),
-    re_path(r'^(?P<base64shortened>{})'.format(base64_pattern), redirect_shortened),
+    re_path(r'^(?P<shortened_path>{})'.format(base64_pattern), redirect_shortened),
 ]
 

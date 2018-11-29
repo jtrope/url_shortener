@@ -4,7 +4,7 @@ from django.http import HttpResponseNotFound, JsonResponse
 from django.shortcuts import redirect
 from django.views import View
 
-from .controller import create_shortened, get_expanded
+from .controller import create_shortened_url, get_expanded_url
 from .exceptions import ShortenerException
 
 
@@ -17,7 +17,7 @@ class ShortenedUrlsAPI(View):
             return JsonResponse({'error': 'Must provide url value'}, status=400)
 
         try:
-            shortened = create_shortened(url)
+            shortened = create_shortened_url(url)
         except ShortenerException as e:
             return JsonResponse({'error': str(e)}, status=400)
 
@@ -27,9 +27,9 @@ class ShortenedUrlsAPI(View):
         )
 
 
-def redirect_shortened(request, base64shortened):
+def redirect_shortened(request, shortened_path):
     try:
-        url = get_expanded(base64shortened)
+        url = get_expanded_url(shortened_path)
     except ShortenerException:
         return HttpResponseNotFound('<h1>Uh-Oh, could not find a link!</h1>')
 

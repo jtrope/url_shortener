@@ -5,7 +5,7 @@ from django.conf import settings
 from django.test import TestCase
 from django.urls import reverse
 
-from .controller import create_shortened
+from .controller import create_shortened_url
 
 
 class ShortenedUrlsAPITests(TestCase):
@@ -44,7 +44,7 @@ class RedirectShortenedTests(TestCase):
 
     def test_successful_redirect(self):
         expanded = 'https://www.google.com/'
-        shortened = create_shortened(expanded)
+        shortened = create_shortened_url(expanded)
         resp = self.client.get(shortened)
         self.assertEquals(resp.status_code, 301)
         self.assertEquals(resp.url, expanded)

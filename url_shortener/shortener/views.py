@@ -2,23 +2,18 @@ import json
 
 from django.http import HttpResponseNotFound, JsonResponse
 from django.shortcuts import redirect
-from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 
 from .controller import create_shortened, get_expanded
 from .exceptions import ShortenerException
 
 
-# TODO: Remove: Insecure!
-@method_decorator(csrf_exempt, name='dispatch')
 class ShortenedUrlsAPI(View):
 
     def post(self, request):
         data = json.loads(request.body)
-        try:
-            url = data['url']
-        except KeyError:
+        url = data.get('url')
+        if not url:
             return JsonResponse({'error': 'Must provide url value'}, status=400)
 
         try:

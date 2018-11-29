@@ -25,6 +25,7 @@ base64_pattern = r'(.*)$'
 
 urlpatterns = [
     # Static
+    path('', include('www.urls')),
     path('admin/', admin.site.urls),
 
     # APIs

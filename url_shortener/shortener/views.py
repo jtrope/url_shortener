@@ -22,7 +22,8 @@ class ShortenedUrlsAPI(View):
             return JsonResponse({'error': str(e)}, status=400)
 
         return JsonResponse(
-            {'shortened_url': shortened}
+            {'shortened_url': shortened},
+            status=201
         )
 
 

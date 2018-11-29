@@ -15,12 +15,12 @@ Pipenv requires pip. You can check if you have it by running:
 If you are missing pip you can install it by following
 these [instructions](https://pip.pypa.io/en/stable/installing/)
 
-To install the dependencies to run the BE please run the following in the project root dir:
+To install the dependencies to run the BE run the following in the project root dir:
 ```bash
 > pipenv install --dev
 ```
 
-Finally, to ensure the database is set up, run the migration like so:
+Finally, to ensure the database (using SQLite) is set up, run the migration like so:
 ```bash
 > pipenv run python url_shortener/manage.py migrate
 ```
@@ -53,7 +53,8 @@ pipenv run python url_shortener/manage.py test url_shortener/
 
 ## Project Structure
 Django is organized around a project with multiple apps. The apps in this project are:
-* [shortener](url_shortener/shortener/): The API responsible for creating shortened urls
+* [shortener](url_shortener/shortener/): The API responsible for creating shortened 
+  urls and that handles redirects to the expanded url
 * [www](url_shortener/www/): Serves up the FE
 
 

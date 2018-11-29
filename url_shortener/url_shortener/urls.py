@@ -20,9 +20,6 @@ from django.urls import include, path, re_path
 from shortener.views import redirect_shortened
 
 
-base64_pattern = r'(.*)$'
-
-
 urlpatterns = [
     # Static
     path('', include('www.urls')),
@@ -30,6 +27,6 @@ urlpatterns = [
 
     # APIs
     path(settings.API_BASE + 'shortened_urls/', include('shortener.urls')),
-    re_path(r'^(?P<shortened_path>{})'.format(base64_pattern), redirect_shortened),
+    re_path(r'^(?P<shortened_path>(.*))', redirect_shortened),
 ]
 

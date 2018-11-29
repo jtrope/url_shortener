@@ -111,3 +111,4 @@ db.sqlite3
 
 # JS
 node_modules/
+bundle.min.js

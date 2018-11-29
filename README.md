@@ -1,28 +1,56 @@
 # url-shortner
 
 ## Installfest
-
+### BE Dependencies
 This project uses [pipenv](https://pipenv.readthedocs.io/en/latest/#install-pipenv-today) for dependency management. If using MacOS, you can install it with Homebrew
 ```bash
 > brew install pipenv
 ``` 
 
-Pipenv requires Python & pip. You can check if they have them with:
+Pipenv requires pip. You can check if you have it by running:
 ```bash
-> python --version
 > pip --version
 ``` 
 
-Most likely your OS was shipped with python :) but if you are missing pip you can install it by following
+If you are missing pip you can install it by following
 these [instructions](https://pip.pypa.io/en/stable/installing/)
 
-Finally, to install the dependencies to run the app please run the following in the project root dir:
+To install the dependencies to run the BE please run the following in the project root dir:
 ```bash
 > pipenv install --dev
 ```
 
+Finally, to ensure the database is set up, run the migration like so:
+```bash
+> pipenv run python url_shortener/manage.py migrate
+```
+
+
+### FE Dependencies
+To install the FE dependencies run:
+```bash
+> npm install
+```
+
+To create the JS bundle run:
+```bash
+> npm run build
+```
+
 ## Starting the application
 From the project root dir run:
+
 ```bash
 pipenv run python url_shortener/manage.py runserver 3000
 ```
+
+## Running tests
+From the project root dir run:
+
+```bash
+pipenv run python url_shortener/manage.py test url_shortener/
+```
+
+## TODOS
+* FE unittests
+* Dockerize for easier installfest :)

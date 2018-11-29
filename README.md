@@ -51,6 +51,12 @@ From the project root dir run:
 pipenv run python url_shortener/manage.py test url_shortener/
 ```
 
-## TODOS
+## Project Structure
+Django is organized around a project with multiple apps. The apps in this project are:
+* [shortener](url_shortener/shortener/): The API responsible for creating shortened urls
+* [www](url_shortener/www/): Serves up the FE
+
+
+## TODO
 * FE unittests
 * Dockerize for easier installfest :)

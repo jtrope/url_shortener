@@ -21,14 +21,14 @@ def get_expanded_url(shortened_path):
         decoded = base64.urlsafe_b64decode(shortened_path)
         pk = int(decoded)
     except (binascii.Error, ValueError):
-        raise ShortenerException('%s is an invalid shortened chunk' % shortened_path)
+        raise ShortenerException('%s is an invalid shortened path' % shortened_path)
 
     try:
-        url = Url.objects.get(pk=pk)
+        url_obj = Url.objects.get(pk=pk)
     except ObjectDoesNotExist:
         raise ShortenerException('Could not find a link matching %s' % shortened_path)
 
-    return url.value
+    return url_obj.value
 
 
 def _get_shortened_path(url_obj):

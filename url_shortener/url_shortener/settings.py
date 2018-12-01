@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'www',
     'shortener',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
 # Static files (CSS, JavaScript, Images)

@@ -17,7 +17,11 @@ class ShortenedUrlsAPI(View):
 
     @transaction.atomic
     def post(self, request):
-        data = json.loads(request.body)
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON provided'}, status=400)
+
         url = data.get('url')
         if not url:
             return JsonResponse({'error': 'Must provide url value'}, status=400)

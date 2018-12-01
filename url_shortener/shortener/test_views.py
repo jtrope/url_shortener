@@ -32,10 +32,17 @@ class ShortenedUrlsAPITests(TestCase):
         )
         self.assertEqual(resp.status_code, 400)
 
-    def test_create_shortened_url_invalid_payload(self):
+    def test_create_shortened_url_wrong_key(self):
         resp = self.post(
             self.API_URL,
             data=json.dumps({'foo': 'bar'}),
+        )
+        self.assertEqual(resp.status_code, 400)
+
+    def test_create_shortened_invalid_json(self):
+        resp = self.post(
+            self.API_URL,
+            data='foo',
         )
         self.assertEqual(resp.status_code, 400)
 

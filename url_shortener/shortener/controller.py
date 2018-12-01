@@ -1,5 +1,4 @@
 import base64
-import binascii
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
@@ -9,29 +8,31 @@ from .exceptions import ShortenerException
 from .models import Url
 
 
-def create_shortened_url(url, domain=settings.DOMAIN):
+def create_url_obj(url):
     _validate_url(url)
-    url_obj, _ = Url.objects.get_or_create(value=url)
-    path = _get_shortened_path(url_obj)
-    return domain + path
+
+    url_obj, created = Url.objects.get_or_create(expanded=url)
+    if created:
+        url_obj.shortened = _generate_shortened_path(url_obj)
+        url_obj.save()
+
+    return url_obj
+
+
+def get_shortened_url(url_obj, domain=settings.DOMAIN):
+    return domain + url_obj.shortened
 
 
 def get_expanded_url(shortened_path):
     try:
-        decoded = base64.urlsafe_b64decode(shortened_path)
-        pk = int(decoded)
-    except (binascii.Error, ValueError):
-        raise ShortenerException('%s is an invalid shortened path' % shortened_path)
-
-    try:
-        url_obj = Url.objects.get(pk=pk)
+        url_obj = Url.objects.get(shortened=shortened_path)
     except ObjectDoesNotExist:
         raise ShortenerException('Could not find a link matching %s' % shortened_path)
 
-    return url_obj.value
+    return url_obj.expanded
 
 
-def _get_shortened_path(url_obj):
+def _generate_shortened_path(url_obj):
     as_str = str(url_obj.pk)
     encoded = base64.urlsafe_b64encode(str.encode(as_str))
     return encoded.decode('utf-8') # Return as str

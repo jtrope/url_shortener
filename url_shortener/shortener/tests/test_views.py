@@ -5,7 +5,7 @@ from django.conf import settings
 from django.test import TestCase
 from django.urls import reverse
 
-from .controller import create_url_obj, get_shortened_url
+from ..controller import create_url_obj, get_shortened_url
 
 
 class ShortenedUrlsAPITests(TestCase):

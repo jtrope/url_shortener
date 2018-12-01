@@ -2,8 +2,8 @@ import base64
 
 from django.test import TestCase
 
-from . import controller
-from .models import Url
+from .. import controller
+from ..models import Url
 
 
 class ShortenerControllerTests(TestCase):

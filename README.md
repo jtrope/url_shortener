@@ -53,9 +53,9 @@ pipenv run python url_shortener/manage.py test url_shortener/
 
 ## Project Structure
 Django is organized around a project with multiple apps. The apps in this project are:
-* [shortener](url_shortener/shortener/): The API responsible for creating shortened 
-  urls and that handles redirects to the expanded url
-* [www](url_shortener/www/): Serves up the FE
+* [shortener](url_shortener/shortener/): API responsible for creating shortened
+  urls and the handler for redirects to the expanded url
+* [www](url_shortener/www/): Serves up the FE. JS lives [here](url_shortener/www/static/www/js/)
 
 
 ## TODO
